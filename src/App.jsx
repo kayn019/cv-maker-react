@@ -12,6 +12,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+import DeleteIcon from '@mui/icons-material/Delete';
 import MailIcon from '@mui/icons-material/Mail';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import './App.css'
@@ -22,14 +23,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateField } from '@mui/x-date-pickers/DateField';
 
 
-
-const drawerWidth = 340;
+const drawerWidth = 360;
 
 function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
     const handleChange = (e) => {
@@ -53,8 +49,6 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
     }));
   };
 
-
-
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -77,8 +71,8 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
         anchor="left"
       >
         
-        <Typography variant="h4" align='center'>
-        <HistoryEduIcon sx={{fontSize : 40}} />CV Generator
+        <Typography variant="h4" align='center' sx={{padding: 5}}>
+        <HistoryEduIcon sx={{fontSize : 40}} />CV Maker
         </Typography>
         <Divider />
 
@@ -93,6 +87,7 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
           <Typography>Personal Information</Typography>
         </AccordionSummary>
         <AccordionDetails>
+
         <Box
       component="form"
       sx={{
@@ -100,7 +95,7 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
       }}
       noValidate
       autoComplete="off"
-    >
+        >
       <div>
         <TextField
           required
@@ -135,6 +130,8 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
     </Box>
         </AccordionDetails>
       </Accordion>
+
+
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -154,7 +151,7 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
     >
       <div>
         <TextField
-          required
+          
           id="school"
           label="School"
           defaultValue=""
@@ -162,7 +159,7 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
           onChange={handleEdu}
         />
         <TextField
-          required
+          
           id="degree"
           label="Degree"
           defaultValue=""
@@ -170,7 +167,7 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
           onChange={handleEdu}
         />
         <TextField
-          required
+          
           id="startDate"
           label="Start Date"
           defaultValue=""
@@ -178,17 +175,22 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
           onChange={handleEdu}
         />
         <TextField
-          required
+          
           id="endDate"
           label="End Date"
           defaultValue=""
            value={edu.endDate}
           onChange={handleEdu}
         />        
-   
+        <TextField
+          
+          id="location"
+          label="Location"
+          defaultValue=""
+           value={edu.location}
+          onChange={handleEdu}
+        />     
       </div>
-     
-     
     </Box>
         </AccordionDetails>
       </Accordion>
@@ -212,7 +214,7 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
     >
       <div>
         <TextField
-          required
+          
           id="name"
           label="Company Name"
           defaultValue=""
@@ -220,7 +222,7 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
           onChange={handleWork}
         />
         <TextField
-          required
+          
           id="position"
           label="Position Title"
           defaultValue=""
@@ -228,7 +230,7 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
           onChange={handleWork}
         />
         <TextField
-          required
+          
           id="startDate"
           label="Start Date"
           defaultValue=""
@@ -262,12 +264,17 @@ function PermanentDrawerLeft({user, setUser,edu, setEdu, work, setWork}) {
 
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {['Trash'].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={(event) => {
+                  console.log("reload clicked");
+                  window.location.reload(false);
+                  
+                }}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <DeleteIcon /> : <MailIcon />}
                 </ListItemIcon>
+                
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
@@ -291,6 +298,7 @@ function App() {
     degree: "",
     startDate: "",
     endDate: "",
+    location: ""
   });
   const [work, setWork] = useState({
     name: "",
@@ -327,7 +335,7 @@ function App() {
           <div className="paper">
             <div className='top'>
              <div className='topInfo'>
-              <Typography variant="h2" sx={{ color: "#000000", fontWeight: "bold" }}>
+              <Typography variant="h3" sx={{ color: "#FFFFFF", fontWeight: "bold" }}>
                 {user.name}
               </Typography>
              </div>
@@ -345,23 +353,26 @@ function App() {
             </div>
             <div className='bot'>
               <div className='botEdu'>
-              <Typography variant="h4" sx={{ color: "#000000" }}>
+              <Typography variant="h4" sx={{ color: "#000000", fontWeight: 900 }}>
                 Education : 
               </Typography>
-              <Typography variant="h6" sx={{ color: "#000000" }}>
+              <Typography variant="h5" sx={{ color: "#000000", fontWeight: 700 }}>
               {edu.degree},  {edu.school}
               </Typography>
 
               <Typography variant="h6" sx={{ color: "#000000" }}>
                 {edu.startDate} ~ {edu.endDate}
               </Typography>
+              <Typography variant="h6" sx={{ color: "#000000" }}>
+                {edu.location}
+              </Typography>
               </div>
               
               <div className='botWork'>
-              <Typography variant="h4" sx={{ color: "#000000" }}>
+              <Typography variant="h4" sx={{ color: "#000000", fontWeight: 900 }}>
                 Professional Experience: 
               </Typography>
-              <Typography variant="h6" sx={{ color: "#000000" }}>
+              <Typography variant="h5" sx={{ color: "#000000", fontWeight: 700 } }>
               {work.name}
               </Typography>
               <Typography variant="h6" sx={{ color: "#000000" }}>
@@ -377,6 +388,9 @@ function App() {
 
               </div>
             </div>
+          <div className='footer'>
+            @kayn019
+          </div>
           </div>
         </div>
 
