@@ -1,7 +1,7 @@
 {
   "homepage": "https://kayn019.github.io/cv-maker-react",
-  "name": "cv-react",
-  "private": true,
+  "name": "cv-maker-react",
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
