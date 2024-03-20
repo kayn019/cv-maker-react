@@ -83,12 +83,15 @@
   height: 200px;
  
   background-color: #7a7a7a;
-
+  padding: 0 10px 0 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+.top .topInfo {
+  margin-bottom: 10px;
 }
 
 .paper .lowInfo {

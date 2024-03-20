@@ -340,6 +340,7 @@ function App() {
               </Typography>
              </div>
              <div className="lowInfo">
+              
               <Typography variant="h6" sx={{ color: "#FFFFFF" }}>
                 {user.email}
               </Typography>
